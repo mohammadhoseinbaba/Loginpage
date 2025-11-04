@@ -1,31 +1,36 @@
 import LoginForm from './Components/LoginForm'
+import SignUp from './Components/Signup'
+import axios from 'axios'
+import { useState } from 'react'
 
 function App() {
+  const [show, setShow] = useState("login")
 
-  const database = [{
-    email: 'aaa',
-    password: '1234'
-  }, {
-    email: 'bbb',
-    password: '12345'
+  const handleLogin = () => {
+
   }
-  ]
-  
-  const handleLogin = (i) => {
+  const handleShowRegister = () => {
+    setShow('Signup')
+  }
+  const handleOnLoginShow = () => {
+    setShow('login')
+  }
+  const handleSignUp = () => {
 
-    const showEmail = database.find(
-      item => i.email === item.email)
-    if (showEmail) {
-      console.log('your email address is right')
-    } else {
-      console.log('is not right')
-    }
   }
 
   return (
-    <div>
-      <LoginForm onLogin={handleLogin} />
-    </div>
+    <>
+      {
+        show === 'login' ? (
+          <div>
+            <LoginForm onLogin={handleLogin} onRegis={handleShowRegister} />
+          </div>) : (
+          <div>
+            <SignUp onSign={handleSignUp} onLoginShow={handleOnLoginShow} />
+          </div>)}
+    </>
+
   )
 }
 export default App
