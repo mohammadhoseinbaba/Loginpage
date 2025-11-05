@@ -13,6 +13,9 @@ function SignUp({ onLoginShow, onSign }) {
             password
         }
         onSign(nameEmailPassword)
+        setEmail('')
+        setName('')
+        setPassword('')
     }
     const handlePassword = (e) => {
         setPassword(e.target.value)
@@ -31,7 +34,7 @@ function SignUp({ onLoginShow, onSign }) {
         <div>
             <form onSubmit={handleSubmit}>
                 <label>Enter your Name </label>
-                <input value={name} onChange={handleName} type='email' />
+                <input value={name} onChange={handleName} type='text' />
                 <br />
                 <label>Enter your email address </label>
                 <input value={email} onChange={handleEmail} type='email' />

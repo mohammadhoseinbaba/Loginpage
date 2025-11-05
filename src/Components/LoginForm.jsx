@@ -13,8 +13,9 @@ function LoginForm({ onLogin, onRegis }) {
             email,
             password
         }
-
         onLogin(EmailPassword)
+        setEmail('')
+        setPassword('')
 
     }
 
