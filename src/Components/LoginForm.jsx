@@ -40,7 +40,7 @@ function LoginForm({ onLogin, onRegis }) {
                 <label>Enter your Password </label>
                 <input value={password} onChange={handlePassword} type='password' />
                 <br />
-                <button type='submit'>Login</button>
+                <button className="bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700" type='submit'>Login</button>
                 <button type='button'>Forget Password</button>
                 <button onClick={handleRegister} type='button'>Register</button>
             </form>

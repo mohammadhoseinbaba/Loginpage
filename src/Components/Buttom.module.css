@@ -1,0 +1,11 @@
+/* Button.module.css */
+.primary {
+  background: #0f766e; /* teal-700 */
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+}
+.primary:hover { background: #115e59; }
+.disabled { opacity: 0.6; cursor: not-allowed; }
