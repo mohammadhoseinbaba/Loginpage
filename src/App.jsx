@@ -1,15 +1,13 @@
 import LoginForm from './Components/LoginForm'
 import SignUp from './Components/Signup'
 import api from './API'
-import axios from 'axios'
 import { useCallback, useState } from 'react'
 import FirstPage from './Components/FirstPage'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios'
 
 function App() {
-
-  const [show, setShow] = useState("login")
 
   const navigate = useNavigate();
 
@@ -36,33 +34,11 @@ function App() {
 
 
   return (
-
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<FirstPage />} />
-        </Routes>
-      </BrowserRouter>
-
-      {
-        show === 'login' ? (
-          <div>
-            <BrowserRouter>
-              <Routes>
-                <Route path="/login" element={<LoginForm onLogin={handleLogin} onRegis={handleShowRegister} />} />
-              </Routes>
-            </BrowserRouter>
-          </div>) : (
-          <div>
-            <BrowserRouter>
-              <Routes>
-                <Route path="/singup" element={<SignUp onSign={handleSignUp} onLoginShow={handleOnLoginShow} />} />
-              </Routes>
-            </BrowserRouter>
-
-          </div>)}
-    </>
-
+    <Routes>
+      <Route path='/' element={<FirstPage />} />
+      <Route path='/login' element={<LoginForm onLogin={handleLogin} onRegis={handleShowRegister} />} />
+      <Route path='/signup' element={<SignUp onLoginShow={handleOnLoginShow} />} />
+    </Routes>
   )
 }
 export default App
