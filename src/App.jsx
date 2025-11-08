@@ -2,38 +2,64 @@ import LoginForm from './Components/LoginForm'
 import SignUp from './Components/Signup'
 import api from './API'
 import axios from 'axios'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
+import FirstPage from './Components/FirstPage'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function App() {
+
   const [show, setShow] = useState("login")
 
-  const handleLogin = async (data) => {
-    const response =await api.post("/users", {
+  const navigate = useNavigate();
+
+  const handleLogin = useCallback(async (data) => {
+    const response = await api.post("/users", {
       email: data.email,
       password: data.password
     })
+    navigate("/")
   }
+    , [navigate])
+
   const handleSignUp = (da) => {
     console.log(da)
   }
 
-  const handleShowRegister = () => {
-    setShow('Signup')
-  }
-  const handleOnLoginShow = () => {
-    setShow('login')
-  }
+  const handleShowRegister = useCallback(() => {
+    navigate("/signUp")
+  }, [navigate])
+
+  const handleOnLoginShow = useCallback(() => {
+    navigate("/login")
+  }, [navigate])
 
 
   return (
+
     <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<FirstPage />} />
+        </Routes>
+      </BrowserRouter>
+
       {
         show === 'login' ? (
           <div>
-            <LoginForm onLogin={handleLogin} onRegis={handleShowRegister} />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/login" element={<LoginForm onLogin={handleLogin} onRegis={handleShowRegister} />} />
+              </Routes>
+            </BrowserRouter>
           </div>) : (
           <div>
-            <SignUp onSign={handleSignUp} onLoginShow={handleOnLoginShow} />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/singup" element={<SignUp onSign={handleSignUp} onLoginShow={handleOnLoginShow} />} />
+              </Routes>
+            </BrowserRouter>
+
           </div>)}
     </>
 
