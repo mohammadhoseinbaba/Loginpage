@@ -1,22 +1,37 @@
 import { useState } from 'react'
+import {useNavigate} from 'react-router'
 
-function LoginForm({ onLogin, onRegis }) {
-
+function LoginForm({ onRegis }) {
+    
+    const Navigate = useNavigate()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-
-
-    const handleSubmit = (e) => {
+    const [loading , setLoading]=useState(false)
+    const [error , setError]=useState("")
+    
+    const  handleSubmit =async (e) => {
         e.preventDefault()
-        const EmailPassword =
-        {
-            email,
-            password
+        setLoading(true)
+        
+        try{
+       const response = await api.post("/users",{ params :{
+      email,
+      password,
+          },} )
+            if (!response.data || response.data.length === 0){
+                throw new Error("Inavlid Email or password")
+    } 
+            navigate("/")
+            setEmail('')
+            setPassword('')
         }
-        onLogin(EmailPassword)
-        setEmail('')
-        setPassword('')
-
+            
+        catch(e){
+        const message = e instanceof Error ? e.message : "Login failed"
+        setError(message)
+    } finally{
+        setLoading(false)
+    }
     }
 
     const handlePassword = (e) => {
