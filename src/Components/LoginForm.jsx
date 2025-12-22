@@ -33,19 +33,6 @@ function LoginForm({ onRegis }) {
         setLoading(false)
     }
     }
-
-    const handlePassword = (e) => {
-        setPassword(e.target.value)
-    }
-
-    const handleEmail = (e) => {
-        setEmail(e.target.value)
-    }
-
-    const handleRegister = () => {
-        onRegis()
-    }
-
     return (
         <div className='min-h-screen grid place-items-center px-4 '>
             <form className='w-full max-w-sm' onSubmit={handleSubmit} >
@@ -57,7 +44,7 @@ function LoginForm({ onRegis }) {
                         required
                         value={email}
                         placeholder='abs@gmail.com'
-                        onChange={handleEmail}
+                        onChange={(e)=>setEmail(e.target.value)}
                         type='email' />
                 </div>
                 <div className='mt-3'>
@@ -67,12 +54,12 @@ function LoginForm({ onRegis }) {
                         autoComplete='password'
                         required
                         value={password}
-                        onChange={handlePassword}
+                        onChange={(e)=>setPassword(e.target.value)}
                         type='password' />
                 </div>
                 <button className="block bg-violet-600 text-white px-4 py-2 rounded hover:bg-violet-700 mt-3 " type='submit'>Login</button>
                 <button className="bg-rose-600 text-white px-4 py-2 rounded hover:bg-rose-700 mt-3 " type='button'>Forget Password</button>
-                <button className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 ml-2" onClick={handleRegister} type='button'>Register</button>
+                <button className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 ml-2"  type='button'>Register</button>
             </form>
 
         </div>
